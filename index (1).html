@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACKPINK UNITED | Official Fansite</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-black: #1a1a1a;
+            --primary-pink: #ff3e82;
+            --secondary-pink: #ff94bb;
+            --accent-gold: #d4af37;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .bebas-font {
+            font-family: 'Bebas Neue', cursive;
+        }
+        
+        .navbar {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--accent-gold));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(26,26,26,0.9) 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-pink), var(--secondary-pink));
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 62, 130, 0.3);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .player-container {
+            transition: all 0.3s ease;
+        }
+        
+        .player-container:hover {
+            box-shadow: 0 10px 30px rgba(255, 62, 130, 0.3);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        /* Page transitions */
+        .page {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <!-- Video Background -->
+    <div class="fixed top-0 left-0 w-full h-full z-0 overflow-hidden">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="https://mlwsa6tsf8rq.i.optimole.com/files/id:1193497c3d1cb37096a79ac3416dbc53/directUpload/ssstik.io_1753144505652.mp4" type="video/mp4" alt="BLACKPINK JUMP MV">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="absolute inset-0 hero-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-bold bebas-font flex items-center" onclick="showPage('home')">
+                <span class="text-pink-500">BLACKPINK</span>
+                <span class="text-amber-400 ml-1">UNITED</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link text-white hover:text-pink-300 font-medium" onclick="showPage('home')">Home</a>
+                <a href="#" class="nav-link text-white hover:text-pink-300 font-medium" onclick="showPage('photos')">Photos</a>
+                <a href="#" class="nav-link text-white hover:text-pink-300 font-medium" onclick="showPage('videos')">Videos</a>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+            <div class="flex flex-col space-y-4 py-4 px-6 bg-black bg-opacity-90">
+                <a href="#" class="text-white hover:text-pink-300 font-medium" onclick="showPage('home'); toggleMenu()">Home</a>
+                <a href="#" class="text-white hover:text-pink-300 font-medium" onclick="showPage('photos'); toggleMenu()">Photos</a>
+                <a href="#" class="text-white hover:text-pink-300 font-medium" onclick="showPage('videos'); toggleMenu()">Videos</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <!-- Home Page -->
+        <div id="home" class="page">
+            <div class="max-w-7xl mx-auto text-center py-24">
+                <h1 class="hero-title text-6xl md:text-8xl font-bold bebas-font mb-6">
+                    <span class="text-pink-500">BLACKPINK</span>
+                    <span class="text-amber-400">UNITED</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+                    The ultimate destination for BLACKPINK fans worldwide. Stay updated with the latest photos, videos, and news about our queens.
+                </p>
+                <button class="btn-primary text-white font-bold py-3 px-8 rounded-full text-lg cursor-default">
+                    EXPLORE NOW
+                </button>
+            </div>
+            
+            <div class="max-w-7xl mx-auto py-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold bebas-font mb-12 text-center">
+                    Latest <span class="text-pink-500">Updates</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6 rounded-xl">
+                        <div class="mb-4 overflow-hidden rounded-lg">
+                            <img src="https://mlwsa6tsf8rq.i.optimole.com/w:600/h:400/id:7ca5d2fd0795cc5dd5378ca25b4fc4f7/directUpload/1753115978434.jpg" alt="all blackpink photo" class="w-full h-auto rounded-lg">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Photo</h3>
+                        <p class="text-gray-300 mb-4">Check out these stunning new photos.</p>
+                        <button class="text-pink-300 hover:text-pink-400 font-medium" onclick="showPage('photos')">View Gallery →</button>
+                    </div>
+                    
+                    <div class="card p-6 rounded-xl">
+                        <div class="mb-4 overflow-hidden rounded-lg">
+                            <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:54ce7e5710cf40232d6e9b48b3365a07/directUpload/1753115993673.jpg" alt="Blackpink music video still featuring dramatic choreography and fashion" class="w-full h-auto rounded-lg">
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Music Video Release</h3>
+                        <p class="text-gray-300 mb-4">Watch their new groundbreaking music video that broke YouTube records again!</p>
+                        <button class="text-pink-300 hover:text-pink-400 font-medium" onclick="showPage('videos')">Watch Now →</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos Page -->
+        <div id="photos" class="page hidden">
+            <div class="max-w-7xl mx-auto py-12">
+                <h2 class="section-title text-3xl md:text-4xl font-bold bebas-font mb-12 text-center">
+                    Photo <span class="text-pink-500">Gallery</span>
+                </h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:8666790142ee5e7ff05ec88da8b030b0/directUpload/1753145577080.jpg" alt="ROSÉ - DEADLINE" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:e4508867e9558c1ce03e1b7f5125acdc/directUpload/1753145578604.jpg" alt="LISA - DEADLINE" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:e2ea4680ff09c0bdde78bfb860a4bc69/directUpload/1753145575430.jpg" alt="JENNIE - DEADLINE" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:75b950c25fa745b5832392d3f80f0a5c/directUpload/1753145573697.jpg" alt="JISOO - DEADLINE" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:c94d01bdc67e69cffdec4b60b12b85ce/directUpload/1753145566151.jpg" alt="LISA - JUMP POSTER" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:e062ce7d988a71efb5aa800dc6ce283b/directUpload/1753145568009.jpg" alt="JENNIE - JUMP POSTER" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:a7775e9a2352cb53d47d8aa64f28adaf/directUpload/1753145564358.jpg" alt="JISOO - JUMP POSTER" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-item rounded-lg overflow-hidden">
+                        <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:9f2c9f2f7893ad6af7747ff55ddd2ab5/directUpload/1753145562033.jpg" alt="ROSÉ - JUMP POSTER" class="w-full h-auto object-cover">
+                   </div>
+                   <div class="gallery-item rounded-lg overflow-hidden">
+                    <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:491b4f776203f4770429b576bbd4f6ad/directUpload/1753145552290.jpgg" alt="ROSÉ - JUMP MV" class="w-full h-auto object-cover">
+                   </div>
+                   <div class="gallery-item rounded-lg overflow-hidden">
+                    <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:4e2e20252aca6b5bb6b39770b527b3f1/directUpload/1753145559907.jpg" alt="JENNIE - JUMP MV" class="w-full h-auto object-cover">
+                   </div>
+                   <div class="gallery-item rounded-lg overflow-hidden">
+                    <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:eaddf2b53d56a93433eba1e31be8d9a5/directUpload/1753145550363.jpg" alt="JISOO - JUMP MV" class="w-full h-auto object-cover">
+                   </div>
+                   <div class="gallery-item rounded-lg overflow-hidden">
+                    <img src="https://mlwsa6tsf8rq.i.optimole.com/w:auto/h:auto/q:auto/id:5b7ffa10782088b1a80c36ad04e30346/directUpload/1753145553863.jpg" alt="LISA - JUMP MV" class="w-full h-auto object-cover">
+                   </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Page -->
+        <div id="videos" class="page hidden">
+            <div class="max-w-7xl mx-auto py-12">
+                <h2 class="section-title text-3xl md:text-4xl font-bold bebas-font mb-12 text-center">
+                    Video <span class="text-pink-500">Music</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="player-container bg-black rounded-xl overflow-hidden">
+                        <iframe class="w-full h-64" src="https://www.youtube.com/embed/CgCVZdcKcqY" frameborder="0" allowfullscreen></iframe>
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold mb-2">JUMP</h3>
+                            <p class="text-gray-300 mb-3">Official Music Video • 88M views</p>
+                        </div>
+                    </div>
+                    <div class="player-container bg-black rounded-xl overflow-hidden">
+                        <iframe class="w-full h-64" src="https://www.youtube.com/embed/POe9SOEKotk" frameborder="0" allowfullscreen></iframe>
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold mb-2">Shut Down</h3>
+                            <p class="text-gray-300 mb-3">Official Music Video • 745M views</p>
+                        </div>
+                    </div>
+                    <div class="player-container bg-black rounded-xl overflow-hidden">
+                        <iframe class="w-full h-64" src="https://www.youtube.com/embed/gQlMMD8auMs" frameborder="0" allowfullscreen></iframe>
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold mb-2">Pink Venom</h3>
+                            <p class="text-gray-300 mb-3">Official Music Video • 994M views</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu.style.maxHeight) {
+                menu.style.maxHeight = null;
+            } else {
+                menu.style.maxHeight = menu.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>
